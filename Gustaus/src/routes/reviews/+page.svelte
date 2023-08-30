@@ -1,6 +1,9 @@
 <script>
   import { enhance } from "$app/forms";
   import { toast } from "svoast";
+  import StarRating from "$lib/components/StarRating.svelte";
+
+  export let data
 
   let form_status;
   $: console.log(form_status);
@@ -25,7 +28,7 @@
   };
 </script>
 
-<h1>Отзывы</h1>
+<h1>Оставить отзыв</h1>
 <form
   method="POST"
   use:enhance={() => {
@@ -46,48 +49,36 @@
   </label>
 
   <div class="grid">
-    <label for="email"
-      >Email
-      <input type="email" id="email" name="email" />
+    <label for="text"
+      >Комментарий
+      <textarea type="text" id="text" name="text" />
     </label>
 
-    <label for="phone"
-      >Телефон
-      <input type="phone" id="phone" name="phone" required />
-    </label>
-  </div>
-
-  <div class="grid">
-    <label for="comment"
-      >Отзыв
-      <textarea type="text" id="comment" name="comment" />
-    </label>
-
-    <fieldset>
+    <fieldset name='rating'>
       <legend>Оценка</legend>
 
-      <label for="small">
-        <input type="radio" id="small" name="size" value="5" checked />
+      <label>
+        <input type="radio" name="rating" value="5" checked />
         Отлично
       </label>
 
       <label for="medium">
-        <input type="radio" id="medium" name="size" value="4" />
+        <input type="radio" name="rating" value="4" />
         Хорошо
       </label>
 
       <label for="large">
-        <input type="radio" id="large" name="size" value="3" />
+        <input type="radio" name="rating" value="3" />
         Нормально
       </label>
 
       <label for="large">
-        <input type="radio" id="large" name="size" value="2" />
+        <input type="radio" name="rating" value="2" />
         Плохо
       </label>
 
       <label for="large">
-        <input type="radio" id="large" name="size" value="1" />
+        <input type="radio" name="rating" value="1" />
         Ужасно
       </label>
     </fieldset>
@@ -98,10 +89,21 @@
   >
 </form>
 
-<style>
-  #comment {
-    height: 80%;
-    text-align: start;
-  resize: none;
-  }
-</style>
+<h1>{ data.reviews.length > 0 ? 'Последние отзывы' : 'Нет отзывов'}</h1>
+
+{#each data.reviews as rev}
+
+<article>
+  <header>
+    <div class="grid">
+      {rev.name}
+      {rev.date_created}
+    </div>
+  </header>
+
+  <p>{rev.text ? rev.text : 'Без комментария'}</p>
+  
+  <footer><StarRating rating={rev.rating} /></footer>
+</article>
+  
+{/each}

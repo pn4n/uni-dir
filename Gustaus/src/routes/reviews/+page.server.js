@@ -2,11 +2,21 @@ import { readItems, createItem } from '@directus/sdk/rest';
 
 import { getDirectusClient } from '$lib/dir-client.js';
 
+export async function load() {
+  const dir = getDirectusClient()
+
+  const reviews = await dir.request(readItems('reviews', {
+		sort: '-date_created', //Sort by creation date descending
+	}))
+
+  return  { reviews }
+};
 
 export const actions = {
 	default: async ({request}) => {
 
-		await new Promise((fulfil) => setTimeout(fulfil, 1000));
+		// artificial delay 
+		// await new Promise((fulfil) => setTimeout(fulfil, 1000));
 
     const dir = getDirectusClient()
 
@@ -14,23 +24,18 @@ export const actions = {
 
     const item_object = {
       
-      user_info: 'Email: ' + data.get('email') +
-               ', Телефон: ' + data.get('phone') + 
-               ', Комментарий: ' + data.get('comment'),
-      request_info: 'Дата: ' + data.get('date') +
-                    ',Время: ' + data.get('time') +
-                    ', Кол-во человек: ' + data.get('people')
+      name: data.get('name'), 
+      text: data.get('text'),
+      rating: data.get('rating'),
                     
     }
+    
 
     try {
-      await dir.request(createItem('requests', item_object));
+      await dir.request(createItem('reviews', item_object));
       return {success: true}
     } catch {
       return {success: false}}
   },
-	// register: async (event) => {
-	// 	// TODO register the user
-	// }
 };
   

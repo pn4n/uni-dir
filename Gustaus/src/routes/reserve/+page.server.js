@@ -5,8 +5,8 @@ import { getDirectusClient } from '$lib/dir-client.js';
 
 export const actions = {
 	default: async ({request}) => {
-
-		await new Promise((fulfil) => setTimeout(fulfil, 1000));
+    // artificial delay 
+		// await new Promise((fulfil) => setTimeout(fulfil, 1000));
 
     const dir = getDirectusClient()
 
