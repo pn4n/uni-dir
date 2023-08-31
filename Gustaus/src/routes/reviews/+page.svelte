@@ -6,7 +6,6 @@
   export let data
 
   let form_status;
-  $: console.log(form_status);
 
   $: show_notif(form_status);
   const show_notif = (status) => {
@@ -28,6 +27,7 @@
   };
 </script>
 
+
 <h1>Оставить отзыв</h1>
 <form
   method="POST"
@@ -36,10 +36,9 @@
 
     return async ({ result, update }) => {
       await update();
-      console.log(result);
       result.data.success == true
-        ? (form_status = "complete")
-        : (form_status = "failes");
+        ? form_status = "complete"
+        : form_status = "failes";
     };
   }}
 >
@@ -107,3 +106,10 @@
 </article>
   
 {/each}
+
+<style>
+  textarea {
+    resize: none;
+    height: 80%;
+  }
+</style>

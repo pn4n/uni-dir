@@ -10,8 +10,8 @@ services:
     environment:
       KEY: '111-some-random-value'
       SECRET: '333-some-random-value'
-      ADMIN_EMAIL: 'admin@example.com'
-      ADMIN_PASSWORD: 'd1r3ctu5'
+      ADMIN_EMAIL: 'jm51@bk.ru'
+      ADMIN_PASSWORD: '74$PV@3sTJ$wz!awA&w2'
       DB_CLIENT: 'sqlite3'
       DB_FILENAME: '/directus/database/data.db'
       WEBSOCKETS_ENABLED: true
