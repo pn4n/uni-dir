@@ -104,13 +104,13 @@ const Toasts = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   })} </div>`;
 });
 const css = {
-  code: "main.svelte-e8pf5q{margin-top:3rem}@media(min-width: 780px){main.svelte-e8pf5q{margin:0 6rem}}main h1, \n            main h2, \n            main h3, \n            main h4, \n            main h5, \n            main h6, \n            main p{padding:0 0.5rem;font-weight:200}:root{--svoast-bar-width:3px;--svoast-font-size:19px;--svoast-bg:#11191f}",
+  code: "main.svelte-fqy93j{margin-top:3rem}@media(min-width: 780px){main.svelte-fqy93j{margin:0 6rem}}main h1, \n            main h2, \n            main h3, \n            main h4, \n            main h5, \n            main h6, \n            main p{padding:0 0.5rem;font-weight:200}:root{--svoast-bar-width:3px;--svoast-font-size:19px;--svoast-bg:#11191f}",
   map: null
 };
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
-  return ` ${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})}  <main class="svelte-e8pf5q">${slots.default ? slots.default({}) : ``}</main> ${validate_component(Toasts, "Toasts").$$render($$result, { position: "bottom-center" }, {}, {})}`;
+  return `${validate_component(Navbar, "Navbar").$$render($$result, {}, {}, {})} <main class="svelte-fqy93j">${slots.default ? slots.default({}) : ``}</main> ${validate_component(Toasts, "Toasts").$$render($$result, { position: "bottom-center" }, {}, {})}`;
 });
 
 export { Layout as default };
-//# sourceMappingURL=_layout.svelte-50c3f028.js.map
+//# sourceMappingURL=_layout.svelte-245ee99e.js.map

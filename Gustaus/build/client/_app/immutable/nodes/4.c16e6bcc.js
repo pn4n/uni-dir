@@ -1,4 +1,4 @@
-import{s as P,m as V,e as j,n as F}from"../chunks/scheduler.4be4d217.js";import{S as N,i as R,g as u,s as v,m as U,h as c,F as x,c as L,j as I,n as z,f as g,k as b,a as A,B as i}from"../chunks/index.5e2710db.js";import{e as G}from"../chunks/forms.93aa2486.js";import{t as y}from"../chunks/Toasts.svelte_svelte_type_style_lang.2c3c6234.js";function J(p){let l,f="Резервация",n,e,s,h=`ФИО
+import{s as P,m as V,e as j,n as F}from"../chunks/scheduler.4be4d217.js";import{S as N,i as R,g as u,s as v,m as U,h as c,F as x,c as L,j as I,n as z,f as g,k as b,a as A,B as i}from"../chunks/index.5e2710db.js";import{e as G}from"../chunks/forms.0ef67cb2.js";import{t as y}from"../chunks/Toasts.svelte_svelte_type_style_lang.887e7ed7.js";function J(p){let l,f="Резервация",n,e,s,h=`ФИО
         <input type="text" id="name" name="name" required=""/>`,_,o,B=`<label for="email">Email
         <input type="email" id="email" name="email"/></label> <label for="phone">Телефон
         <input type="phone" id="phone" name="phone" required=""/></label>`,M,m,w=`<label for="date">Дата
