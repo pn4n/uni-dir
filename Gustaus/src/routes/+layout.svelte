@@ -24,9 +24,6 @@
 <Toasts position='bottom-center'/>
 
 <style>
-    p {
-        text-align: center;
-    }
     main {
         margin-top: 3rem;
     }
