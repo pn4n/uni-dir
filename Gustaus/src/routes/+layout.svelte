@@ -4,18 +4,7 @@
     import { Toasts } from 'svoast'
 </script>
 
-<!-- {#if Object.is(data.dir)}
-{console.log(data.dir)}
-<p>connected</p>
-{:else}
-{console.log(data.dir)}
-<mark>not connected</mark>
-{/if} -->
-
 <Navbar/>
-<!-- {#if !data.hasOwnProperty('dir')}
-<h1>directus is disconected</h1>
-{/if} -->
 
 <main>
     <slot/>

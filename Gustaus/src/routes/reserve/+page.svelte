@@ -33,7 +33,7 @@
 
           return async ({ result, update }) => {
             await update();
-            // form_status =
+            
             result.data.success == true ?
               form_status = 'complete' :
               form_status = 'failes'
