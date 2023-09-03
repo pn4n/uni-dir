@@ -9,8 +9,6 @@
 
   $: json_order = JSON.stringify(cart_list)
   $: form_status = form?.success
-  $: console.log(form_status)
-  $: console.log( 'suc: ' + form?.success)
 
   $: total = Object.values(cart_list).reduce(
     (total, curr) => total + curr.price * curr.counter,

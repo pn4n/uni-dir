@@ -3,7 +3,6 @@
   import { toast } from 'svoast';
 
   let form_status
-  $:console.log( form_status )
   
 
   $: show_notif(form_status);
@@ -34,7 +33,6 @@
 
           return async ({ result, update }) => {
             await update();
-            console.log(result)
             // form_status =
             result.data.success == true ?
               form_status = 'complete' :

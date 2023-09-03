@@ -1,15 +1,22 @@
 import { readItems, createItem } from '@directus/sdk/rest';
-
+import { error } from '@sveltejs/kit';
 import { getDirectusClient } from '$lib/dir-client.js';
 
 export async function load() {
-  const dir = getDirectusClient()
+  
+  return {
+    streamed: {
+      reviews: new Promise(async (resolve) => {
+        const dir = getDirectusClient()
 
-  const reviews = await dir.request(readItems('reviews', {
-		sort: '-date_created', //Sort by creation date descending
-	}))
-
-  return  { reviews }
+        const reviews = await dir.request(readItems('reviews', {
+          sort: '-date_created', //Sort by creation date descending
+        }))
+        resolve(reviews)
+    })
+  }
+}
+  // return  { reviews }
 };
 
 export const actions = {

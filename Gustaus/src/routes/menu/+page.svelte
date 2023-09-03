@@ -1,8 +1,10 @@
 <script>
     import { toast } from "svoast";
 
-    import MenuFooter from "../../lib/components/MenuFooter.svelte";
-    import OrderForm from "../../lib/components/OrderForm.svelte";
+    import MenuFooter from "$lib/components/MenuFooter.svelte";
+    import OrderForm from "$lib/components/OrderForm.svelte";
+    import LazyImage from "$lib/components/LazyImage.svelte";
+    import LoadingDirectus from "../../lib/components/LoadingDirectus.svelte";
 
     export let data;
 
@@ -16,7 +18,7 @@
     );
 
     const add_item = (id) => {
-        const it = data.items.find((item) => item["id"] === id);
+        const it = data.streamed.dir.items.find((item) => item["id"] === id);
 
         cart_list[id] = { title: it.title, price: it.price, counter: 1 };
     };
@@ -65,55 +67,64 @@
     </article>
 </dialog>
 
-{#each data.menu_items as category}
-    <h1>{category.title}</h1>
+{#await data.streamed.dir}
+    <LoadingDirectus />
+{:then dir}
+    {#each dir.menu_items as category}
+        <h1>{category.title}</h1>
 
-    <div class="grid-container">
-        {#each category.items as item}
-            <article
-                class="container"
-                style=" background-image: url(http://0.0.0.0:8055/assets/{item.img})"
-            >
-                <header>{item.title}</header>
+        <div class="grid-container">
+            {#each category.items as item}
+                <article class="container">
+                    <header>{item.title}</header>
 
-                <footer>
-                    <p>{item.price} руб</p>
-                    <div class="grid">
-                        {#if cart_list.hasOwnProperty(item.id)}
-                            <button
-                                class="outline"
-                                on:click={() => handle_increse(item.id)}
-                                >+</button
-                            >
+                    <LazyImage
+                        src="{dir.url}/assets/{item.img}"
+                        alt="menu item"
+                    />
 
-                            <input
-                                type="number"
-                                bind:value={cart_list[item.id]["counter"]}
-                            />
+                    <footer>
+                        <p>{item.price} руб</p>
+                        <div class="grid">
+                            {#if cart_list.hasOwnProperty(item.id)}
+                                <button
+                                    class="outline"
+                                    on:click={() => handle_increse(item.id)}
+                                    >+</button
+                                >
 
-                            <button
-                                class="outline"
-                                on:click={() => handle_decrese(item.id)}
-                                >-</button
-                            >
-                        {:else}
-                            <button
-                                class="outline"
-                                on:click={() => add_item(item.id)}
-                                >Добавить</button
-                            >
-                        {/if}
-                    </div>
-                </footer>
-            </article>
-        {/each}
+                                <input
+                                    type="number"
+                                    bind:value={cart_list[item.id]["counter"]}
+                                />
+
+                                <button
+                                    class="outline"
+                                    on:click={() => handle_decrese(item.id)}
+                                    >-</button
+                                >
+                            {:else}
+                                <button
+                                    class="outline"
+                                    on:click={() => add_item(item.id)}
+                                    >Добавить</button
+                                >
+                            {/if}
+                        </div>
+                    </footer>
+                </article>
+            {/each}
+        </div>
+        <hr />
+    {/each}
+
+    <div hidden={sum < 1}>
+        <MenuFooter bind:sum bind:dialog />
     </div>
-    <hr />
-{/each}
-
-<div hidden={sum < 1}>
-    <MenuFooter bind:sum bind:dialog />
-</div>
+{:catch error}
+    <p>Directus is not connected</p>
+    <p>{error.message}</p>
+{/await}
 
 <style>
     dialog {

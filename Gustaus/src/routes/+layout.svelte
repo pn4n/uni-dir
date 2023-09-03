@@ -4,7 +4,18 @@
     import { Toasts } from 'svoast'
 </script>
 
+<!-- {#if Object.is(data.dir)}
+{console.log(data.dir)}
+<p>connected</p>
+{:else}
+{console.log(data.dir)}
+<mark>not connected</mark>
+{/if} -->
+
 <Navbar/>
+<!-- {#if !data.hasOwnProperty('dir')}
+<h1>directus is disconected</h1>
+{/if} -->
 
 <main>
     <slot/>
@@ -13,14 +24,19 @@
 <Toasts position='bottom-center'/>
 
 <style>
-    
+    p {
+        text-align: center;
+    }
+    main {
+        margin-top: 3rem;
+    }
     @media (min-width: 780px) {
         main {
             margin: 0 6rem;
         }
         
     }
-    :global(main h1, 
+    :global( h1, 
             main h2, 
             main h3, 
             main h4, 

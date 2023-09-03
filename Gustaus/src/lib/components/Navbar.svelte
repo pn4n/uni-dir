@@ -29,9 +29,10 @@
     /* TODO: burger menu on widths < 400px */
     nav {
         padding: 0.5rem 1rem;
+        margin-bottom: 2rem ;
         border-bottom: 1px solid var(--primary);
         background-color: var(--form-element-focus-color);
-        margin-bottom: 3rem;
+
     }
 
     a {
