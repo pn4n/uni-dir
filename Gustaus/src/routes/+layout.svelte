@@ -36,7 +36,7 @@
         }
         
     }
-    :global( h1, 
+    :global(main h1, 
             main h2, 
             main h3, 
             main h4, 
@@ -44,7 +44,7 @@
             main h6, 
             main p) {
         padding: 0 0.5rem;
-        font-weight: 300;
+        font-weight: 200;
     }
     :root {
 	--svoast-bar-width: 3px;

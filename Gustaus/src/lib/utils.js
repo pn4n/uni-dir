@@ -9,3 +9,20 @@ export function categorizeItems(categories, items) {
       return { ...category, items: categoryItems };
     });
   }
+
+export function ISOtoLocal(isoTime) {
+    const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const date = new Date(isoTime);
+    const shiftedDate = new Date(date.toLocaleString("en-US", { timeZone: clientTimezone }));
+  
+    const formattedTime = shiftedDate.toLocaleString("ru-RU", { 
+      year: "2-digit", 
+      month: "2-digit", 
+      day: "2-digit", 
+      hour: "2-digit", 
+      minute: "2-digit" 
+    });
+  
+    return formattedTime;
+  }
+  

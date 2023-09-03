@@ -1,10 +1,11 @@
 <script>
   import { enhance } from "$app/forms";
   import { toast } from "svoast";
-  import StarRating from "$lib/components/StarRating.svelte";
-  import LoadingDirectus from "$lib/components/LoadingDirectus.svelte";
 
-  export let data; // данные от +page.server.js
+  import LoadingDirectus from "$lib/components/LoadingDirectus.svelte";
+    import Review from "../../lib/components/Review.svelte";
+  
+  export let data;
 
   let form_status;
   $: show_notif(form_status);
@@ -93,18 +94,7 @@
   <h1>{reviews.length > 0 ? "Последние отзывы" : "Нет отзывов"}</h1>
 
   {#each reviews as rev}
-    <article>
-      <header>
-        <div class="grid">
-          {rev.name}
-          {rev.date_created}
-        </div>
-      </header>
-
-      <p>{rev.text ? rev.text : "Без комментария"}</p>
-
-      <footer><StarRating rating={rev.rating} /></footer>
-    </article>
+    <Review {...rev}/>
   {/each}
 {:catch error}
   <p>Directus is not connected</p>
