@@ -1,34 +1,19 @@
 <script>
   import { enhance } from "$app/forms";
-  import { toast } from "svoast";
+
+  import { show_notif } from "$lib/utils";
 
   import LoadingDirectus from "$lib/components/LoadingDirectus.svelte";
-    import Review from "../../lib/components/Review.svelte";
+  import Review from "$lib/components/Review.svelte";
   
   export let data;
 
   let form_status;
   $: show_notif(form_status);
-  const show_notif = (status) => {
-    switch (status) {
-      case "complete":
-        toast.removeAll();
-        toast.success("отзыв отправлен");
-        break;
 
-      case "loading":
-        toast.info("Загрузка...");
-        break;
-
-      case "failes":
-        toast.removeAll();
-        toast.error("Ошибка! Отзыв не отправлен");
-        break;
-    }
-  };
 </script>
 
-<h1>Оставить отзыв</h1>
+<h1>{ i("reviews.header") }</h1>
 {#await data.streamed.reviews}
   <LoadingDirectus />
 {:then reviews}
@@ -46,58 +31,57 @@
     }}
   >
     <label for="firstname">
-      Имя
+      { i("form.name") }
       <input type="text" id="name" name="name" required />
     </label>
 
     <div class="grid">
-      <label for="text"
-        >Комментарий
+      <label for="text">{ i("form.comment") }
         <textarea type="text" id="text" name="text" />
       </label>
 
       <fieldset name="rating">
-        <legend>Оценка</legend>
+        <legend>{ i("reviews.rating.header") }</legend>
 
         <label>
           <input type="radio" name="rating" value="5" checked />
-          Отлично
+          { i("reviews.rating5") }
         </label>
 
         <label for="medium">
           <input type="radio" name="rating" value="4" />
-          Хорошо
+          { i("reviews.rating4") }
         </label>
 
         <label for="large">
           <input type="radio" name="rating" value="3" />
-          Нормально
+          { i("reviews.rating3") }
         </label>
 
         <label for="large">
           <input type="radio" name="rating" value="2" />
-          Плохо
+          { i("reviews.rating2") }
         </label>
 
         <label for="large">
           <input type="radio" name="rating" value="1" />
-          Ужасно
+          { i("reviews.rating1") }
         </label>
       </fieldset>
     </div>
 
     <button class="outline" disabled={form_status == "loading"}>
-      Отправить отзыв</button
+      { i("form.submit") }</button
     >
   </form>
 
-  <h1>{reviews.length > 0 ? "Последние отзывы" : "Нет отзывов"}</h1>
+  <h1>{reviews.length > 0 ? i("reviews.last_reviews") : i("reviews.no_reviews") }</h1>
 
   {#each reviews as rev}
     <Review {...rev}/>
   {/each}
 {:catch error}
-  <p>Directus is not connected</p>
+  <p>{i('directus_failed')}</p>
   <p>{error.message}</p>
 {/await}
 

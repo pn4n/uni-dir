@@ -4,6 +4,8 @@ import { getDirectusClient } from '$lib/dir-client.js';
 import { fail } from 'assert';
 import { categorizeItems } from '$lib/utils';
 
+// import { language } from '@inlang/sdk-js';
+
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
@@ -13,10 +15,16 @@ export async function load() {
       dir: new Promise(async (resolve) => {
         const dir = getDirectusClient()
 
-        const items = await dir.request(readItems('items'))
-        let categories = await dir.request(readItems('categories'))
-        // SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSs
-        await new Promise((fulfil) => setTimeout(fulfil, 10000));
+        const items = await dir.request(readItems('items', 
+              { deep: {translations: { }}, 
+                fields: ['*', { translations: ['*'] }]
+              } ))
+              
+        let categories = await dir.request(readItems('categories', 
+              { deep: {translations: { }}, 
+                fields: ['*', { translations: ['*'] }]
+              } ))
+
         const cat_expaned = categorizeItems(categories, items)
         resolve({ menu_items: cat_expaned, items: items, url: dir.url.origin })
       }),
@@ -26,20 +34,15 @@ export async function load() {
 
 export const actions = {
   default: async ({ request }) => {
-
-    // artificial delay 
-    // await new Promise((fulfil) => setTimeout(fulfil, 1000));
-
     const dir = getDirectusClient()
-
     const data = await request.formData();
 
     const item_object = {
 
-      user_info: 'Email: ' + data.get('email') +
-        ', Phone: ' + data.get('phone') +
-        ', Address: ' + data.get('address') +
-        ', Comment: ' + data.get('comment'),
+      user_info:'Email: ' + data.get('email') +
+              ', Phone: ' + data.get('phone') +
+              ', Address: ' + data.get('address') +
+              ', Comment: ' + data.get('comment'),
       request_info: data.get('order')
     }
 

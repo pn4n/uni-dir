@@ -1,4 +1,5 @@
 <script>
+    import { i } from "@inlang/sdk-js";
     export let sum = 0
     export let dialog
 
@@ -8,12 +9,21 @@
 </script>
 
 <article class="grid">
+    <div class="sum-div">
+        <p>{i('menu.sum')}</p>
+        <p>{sum} {i('menu.currency')}</p>
+    </div>
     <button class="outline contrast" type="button" on:click={handle_click}>
-        К оформлению (сумма: {sum} руб)
+        { i('menu.chechkout') }
     </button>
 </article>
 
 <style>
+    p {
+        min-width: fit-content;
+        margin: auto;
+        font-weight: 500;
+    }
     article {
         position: fixed;
         bottom: 0;
@@ -24,9 +34,25 @@
         text-align: center;
         margin: 10px auto;
     }
+    .sum-div {
+        display: flex;
+    }
     button {
+        /* display: inline-flex;
+        align-items: center; */
         margin-bottom: 0px;
-        border-left: none;
-        border-right: none;
+        max-width: 300px;
+        /* border-left: none;
+        border-right: none; */
+        /* font-size: 1em;
+    line-height: 1.2;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 0.375em; */
+    }
+
+    .grid {
+        display: inline-flex;
+        justify-content: space-around;
     }
 </style>

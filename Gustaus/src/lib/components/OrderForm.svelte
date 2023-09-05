@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+    import { i } from '@inlang/sdk-js';
   
   export let cart_list
   
@@ -22,13 +23,14 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Наименование</th>
-        <th scope="col">Цена</th>
-        <th scope="col">Стоимость</th>
+        <th scope="col">{ i('menu.order.title') }</th>
+        <th scope="col">{ i('menu.order.price') }</th>
+        <th scope="col">{ i('menu.order.subtotal') }</th>
       </tr>
     </thead>
     <tbody>
-      {#each Object.values(cart_list) as item, i (item.id)}
+      {#each Object.entries(cart_list) as [key, item]}
+      
         <tr>
           <th scope="row">{item.counter}</th>
           <td>{item.title}</td>
@@ -39,7 +41,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <th scope="col">Всего</th>
+        <th scope="col">{ i('menu.order.total') }</th>
         <td />
         <td />
         <td>{total}</td>
@@ -61,31 +63,28 @@
     <input type="text" id="order" name="order" hidden 
       bind:value={json_order}>
 
-      <label for="name"> ФИО
+      <label for="name">{ i('form.name') }
         <input type="text" id="name" name="name" required />
       </label>
 
     <div class="grid">
-      <label for="email"
-        >Email
+      <label for="email">{ i('form.email') }
         <input type="email" id="email" name="email" />
       </label>
 
-      <label for="phone"
-        >Телефон
+      <label for="phone">{ i('form.phone') }
         <input type="phone" id="phone" name="phone" required />
       </label>
     </div>
 
-    <label for="address"
-      >Адрес
+    <label for="address">{ i('form.address') }
       <input type="text" id="address" name="address" />
     </label>
 
     <label for="comment"
-      >Комментарий
+      >{ i('form.comment') }
       <input type="text" id="comment" name="comment" />
     </label>
 
-    <button class="outline">Подтвердить заказ</button>
+    <button class="outline">{ i('form.submit') }</button>
   </form>

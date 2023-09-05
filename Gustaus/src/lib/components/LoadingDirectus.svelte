@@ -1,5 +1,4 @@
-
 <article>
     <progress></progress>
-    <p>Directus is loading, please wait...</p>
+    <p>{i('directus_load')}</p>
 </article>
