@@ -1,0 +1,3 @@
+import{t as i,g as a}from"./Toasts.svelte_svelte_type_style_lang.b99f9af5.js";import"./index.99c81ec3.js";const l=t=>{switch(t){case"complete":i.removeAll(),i.success(a().i("toast.success"));break;case"loading":i.info(a().i("toast.loading"));break;case"failes":i.removeAll(),i.error(a().i("toast.error"));break}};function m(t,e){return t.translations.find(o=>o.languages_code.startsWith(e)).title}function d(t){const e=Intl.DateTimeFormat().resolvedOptions().timeZone,o=new Date(t);return new Date(o.toLocaleString("en-US",{timeZone:e})).toLocaleString("ru-RU",{year:"2-digit",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"})}function g(t){return t.split(`
+
+`).map(e=>e.replace(/\n/g,"<br>"))}export{d as I,l as a,m as g,g as s};

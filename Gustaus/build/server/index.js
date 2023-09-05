@@ -1,14 +1,9 @@
-import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from './chunks/ssr-29c0f19e.js';
+import { b as base, r as reset, a as assets } from './chunks/paths-05fee424.js';
 import { e as error, j as json, t as text, R as Redirect, H as HttpError, A as ActionFailure } from './chunks/index-2b68e648.js';
-import { w as writable, r as readable } from './chunks/index2-2cc97b45.js';
+import { w as writable, r as readable } from './chunks/index2-5001341d.js';
+import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from './chunks/ssr-58f9b3e9.js';
+import './chunks/utils2-05c95967.js';
 
-let base = "";
-let assets = base;
-const initial = { base, assets };
-function reset() {
-  base = initial.base;
-  assets = initial.assets;
-}
 let public_env = {};
 function set_private_env(environment) {
 }
@@ -102,7 +97,7 @@ const options = {
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="ru">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + `/logo.png" />
+    app: ({ head, body, assets, nonce, env }) => '<!DOCTYPE html>\n<html>\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets + `/logo.png" />
 		<meta name="viewport" content="width=device-width" />
 		<title>Gustau's</title>
 		` + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover">\n		<div style="display: contents">' + body + "</div>\n	</body>\n</html>\n",
@@ -167,10 +162,10 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "1r0zq7p"
+  version_hash: "12wufrq"
 };
 function get_hooks() {
-  return import('./chunks/hooks.server-6135521a.js');
+  return import('./chunks/hooks.server-d9053fd3.js');
 }
 
 const DEV = false;
